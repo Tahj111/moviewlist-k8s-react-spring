@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-microservice
+  labels:
+    app: spring-microservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-microservice
+  template:
+    metadata:
+      labels:
+        app: spring-microservice
+    spec:
+      containers:
+      - name: spring-microservice
+        image: kasefa/spring-microservice:1.0.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/movies
+            port: 8080
+          initialDelaySeconds: 90
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /api/movies
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10

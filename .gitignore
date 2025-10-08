@@ -1,0 +1,24 @@
+# Node
+react-app/node_modules/
+react-app/build/
+node_modules/
+npm-debug.log
+.env
+.DS_Store
+
+# Java/Gradle
+**/build/
+**/out/
+.gradle/
+.gradle-cache/
+*.class
+*.jar
+*.war
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+Thumbs.db
